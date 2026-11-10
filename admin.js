@@ -64,7 +64,7 @@
           <div class="acts">
             ${r.status === "pending" ? `<button class="btn ok grow" data-d="approve" style="flex:1">${icon("check")}<span>Approve</span></button><button class="btn primary" data-d="reject" style="flex:1">${icon("x")}<span>Decline</span></button>` : `<button class="btn primary" data-d="cancel" style="flex:1">${icon("x")}<span>Cancel booking</span></button>`}
           </div>` : ""}
-        <div style="text-align:center;margin-top:18px"><a href="admin.html" class="hint" style="color:var(--muted)">Open full dashboard →</a></div>
+        <div style="text-align:center;margin-top:18px"><a href="print.html?id=${encodeURIComponent(r.id)}&t=${encodeURIComponent(token)}" target="_blank" rel="noopener" class="hint" style="color:var(--gold)">Print / PDF</a> · <a href="admin.html" class="hint" style="color:var(--muted)">Open full dashboard →</a></div>
       </div></div>`;
       $$("[data-d]").forEach((b) => b.addEventListener("click", () => act(b, b.dataset.d)));
       if (want && !done) { const b = $(`[data-d="${want}"]`); if (b) { b.style.outline = "2px solid var(--gold)"; b.style.outlineOffset = "3px"; } }
@@ -173,6 +173,7 @@
         </button>
         <div class="req-b"><div><div class="req-in">
           ${details(r)}
+          <div class="acts"><a class="btn ghost" style="text-decoration:none" href="print.html?id=${encodeURIComponent(r.id)}" target="_blank" rel="noopener">${icon("printer")}<span>Print / PDF</span></a></div>
           ${r.status === "pending" || r.status === "approved" ? `
             <div class="field" style="margin:14px 0 0"><input class="input reason" placeholder="Note to the teacher (optional)" /></div>
             <div class="acts">${r.status === "pending" ? `<button class="btn ok" data-d="approve" style="flex:1">${icon("check")}<span>Approve</span></button><button class="btn primary" data-d="reject" style="flex:1">${icon("x")}<span>Decline</span></button>` : `<button class="btn ghost" data-d="cancel">${icon("x")}<span>Cancel booking</span></button>`}</div>` : ""}

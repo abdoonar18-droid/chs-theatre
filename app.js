@@ -238,12 +238,14 @@
       items.sort((a, b) => (b.created || 0) - (a.created || 0));
       host.innerHTML = items.map((r) => {
         const live = (r.status === "pending" || r.status === "approved") && r.date >= today;
+        const et = (list.find((x) => x.id === r.id) || {}).et;
+        const pr = `<a class="pill-btn" href="print.html?id=${encodeURIComponent(r.id)}&et=${encodeURIComponent(et)}" target="_blank" rel="noopener">${icon("printer")}<span>${t("print")}</span></a>`;
         return `
         <div class="card mine-item" data-id="${esc(r.id)}">
           <div class="mi-id">${esc(r.id)}</div>
           <div class="mi-t"><b>${esc(r.title)}</b><small>${fmtDate(r.date, { weekday: "short", day: "numeric", month: "short" })} · ${r.start ? range(r.start, r.end) : ""}</small>${r.reason ? `<small style="display:block;color:#ff8a8f">${esc(r.reason)}</small>` : ""}</div>
           <span class="tag ${r.status}">${t(r.status)}</span>
-          ${live ? `<div class="mi-acts"><button class="pill-btn" data-act="edit">${icon("pencil")}<span>${t("edit")}</span></button><button class="pill-btn" data-act="withdraw">${icon("x")}<span>${t("withdraw")}</span></button></div>` : ""}
+          <div class="mi-acts">${pr}${live ? `<button class="pill-btn" data-act="edit">${icon("pencil")}<span>${t("edit")}</span></button><button class="pill-btn" data-act="withdraw">${icon("x")}<span>${t("withdraw")}</span></button>` : ""}</div>
         </div>`;
       }).join("");
     } catch { /* keep previous */ }
@@ -613,6 +615,7 @@
       if (res.unchanged) { toast(t("unchanged")); return; }
       store.set("chs-me", { name: f.name, email: f.email, dept: f.dept, deptOther: f.deptOther, hod: f.hod });
       if (!editing) addMine(res.id, res.et);
+      $("#donePrint").href = `print.html?id=${encodeURIComponent(res.id)}&et=${encodeURIComponent(editing ? editing.et : res.et)}`;
       showDone(res.id, data, editing ? (res.reapproval ? "re" : "saved") : "", res.status || "pending");
       editing = null; resetForm();
       loadData(); renderMine();

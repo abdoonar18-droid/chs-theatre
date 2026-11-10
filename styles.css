@@ -199,6 +199,7 @@ html[lang="ar"] .brand small { letter-spacing: .05em; font-size: 12px; }
   border: 1px solid var(--line-2); background: var(--glass); font-size: 13px; font-weight: 600; color: var(--ivory);
   transition: background .3s, border-color .3s, transform .3s var(--ease);
 }
+a.pill-btn { text-decoration: none; }
 .pill-btn:hover { background: var(--glass-2); border-color: var(--gold); }
 .pill-btn:active { transform: scale(.96); }
 .pill-btn svg { width: 16px; height: 16px; }

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="logo-dark.png" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body class="locked">
   <!-- ─── Intro: the curtain ─── -->
@@ -263,7 +263,7 @@
           <h3 data-t="doneT">Request sent!</h3>
           <p data-t="doneP">The theatre manager will review it. You’ll get an email — and a calendar invite once it’s approved.</p>
           <div class="status-line"><i></i><span data-t="awaiting">Awaiting approval</span></div>
-          <div><button class="btn ghost" data-close><span data-t="doneBtn">Done</span></button></div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn gold" id="donePrint" target="_blank" rel="noopener"><span data-icon="printer"></span><span data-t="print">Print / PDF</span></a><button class="btn ghost" data-close><span data-t="doneBtn">Done</span></button></div>
           <div class="contact-slot" style="margin-top:22px"></div>
         </div>
       </div>
@@ -277,10 +277,10 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="config.js?v=4"></script>
-  <script src="api.js?v=4"></script>
-  <script src="i18n.js?v=4"></script>
-  <script src="icons.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="config.js?v=5"></script>
+  <script src="api.js?v=5"></script>
+  <script src="i18n.js?v=5"></script>
+  <script src="icons.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

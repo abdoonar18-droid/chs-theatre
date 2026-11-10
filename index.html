@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0b0608" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CHS Theatre" />
+  <title>CHS Theatre</title>
+  <meta name="description" content="Book the Cambridge High School theatre." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="logo-dark.png" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+</head>
+<body class="locked">
+  <!-- ─── Intro: the curtain ─── -->
+  <div id="intro" aria-hidden="true">
+    <div class="intro-stage">
+      <div class="intro-spot"></div>
+      <div class="intro-pool"></div>
+      <div class="intro-mark">
+        <img src="logo-dark.png" alt="" />
+        <div class="intro-title">CHS Theatre</div>
+        <div class="intro-sub" data-t="introSub">Reservations</div>
+      </div>
+    </div>
+    <div class="curtain l"><div class="shine"></div></div>
+    <div class="curtain r"><div class="shine"></div></div>
+    <div class="valance"></div>
+    <div class="fringe"></div>
+    <button class="skip" data-t="skip">Skip</button>
+  </div>
+
+  <div class="stage-bg">
+    <div class="beam b1"></div>
+    <div class="beam b2"></div>
+    <canvas id="dust"></canvas>
+  </div>
+  <div class="grain"></div>
+
+  <div class="app">
+    <header class="top">
+      <div class="wrap">
+        <a class="brand" href="#">
+          <img src="logo-dark.png" alt="Cambridge High School" />
+          <div><b>CHS Theatre</b><small data-t="brandSub">Cambridge High School</small></div>
+        </a>
+        <div class="spacer"></div>
+        <button class="pill-btn" id="langBtn" aria-label="Language"><span data-icon="globe"></span><span id="langLbl">عربي</span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <span class="eyebrow reveal"><i></i><span data-t="eyebrow">Theatre reservations · Now online</span></span>
+        <h1 class="reveal" data-t-html="heroTitle">The stage is <em>yours.</em></h1>
+        <p class="lead reveal" data-t="heroLead">Reserve the school theatre in under a minute. Your request goes straight to the Theatre Manager — you’ll get the confirmation by email and in your calendar.</p>
+        <div class="cta-row reveal">
+          <button class="btn primary" data-open-booking><span data-icon="ticket"></span><span data-t="ctaBook">Book the theatre</span></button>
+          <a class="btn ghost" href="#availability"><span data-icon="calendar"></span><span data-t="ctaAvail">See availability</span></a>
+        </div>
+        <div class="facts reveal">
+          <span><span data-icon="clock"></span><span data-t="fact1">Book by the hour</span></span>
+          <span><span data-icon="bell"></span><span data-t="fact2">Book at least 3 days ahead</span></span>
+          <span><span data-icon="mail"></span><span data-t="fact3">Email + calendar confirmation</span></span>
+        </div>
+      </section>
+
+      <section class="block wrap" id="availability">
+        <div class="sec-head reveal">
+          <div>
+            <h2 data-t="availTitle">Availability</h2>
+            <p data-t="availSub">Tap a day to see when the stage is free.</p>
+          </div>
+          <div class="legend">
+            <span><i class="l-free"></i><span data-t="free">Free</span></span>
+            <span><i class="l-pend"></i><span data-t="pending">Pending</span></span>
+            <span><i class="l-busy"></i><span data-t="booked">Booked</span></span>
+          </div>
+        </div>
+        <div class="avail reveal">
+          <div class="card cal" id="mainCal"></div>
+          <div class="card dayp" id="dayPanel"></div>
+        </div>
+      </section>
+
+      <section class="block wrap" id="mineSec" hidden>
+        <div class="sec-head reveal">
+          <div>
+            <h2 data-t="mineTitle">My requests</h2>
+            <p data-t="mineSub">Requests sent from this device.</p>
+          </div>
+          <button class="pill-btn" id="mineRefresh"><span data-icon="refresh"></span><span data-t="refresh">Refresh</span></button>
+        </div>
+        <div class="mine reveal" id="mineList"></div>
+      </section>
+    </main>
+
+    <footer class="foot wrap">
+      <div class="orn"></div>
+      <blockquote data-t="quote">“The theatre is living art and demands a higher respect from those watching it.”</blockquote>
+      <div data-t="enjoy">Welcome to Cambridge High School theatre — enjoy the art.</div>
+      <div class="contact-slot" style="margin-top:30px"></div>
+      <div style="margin-top:22px"><a href="admin.html" data-t="managerLink">Theatre manager</a></div>
+    </footer>
+  </div>
+
+  <!-- ─── Booking sheet ─── -->
+  <div class="sheet-wrap" id="sheet" role="dialog" aria-modal="true" aria-labelledby="stepTitle">
+    <div class="scrim" data-close></div>
+    <div class="sheet">
+      <div class="sheet-top">
+        <div class="grabber"></div>
+        <div class="sheet-bar">
+          <div class="st"><small id="stepNum">Step 1 of 5</small><b id="stepTitle">About you</b></div>
+          <button class="icon-btn" data-close aria-label="Close"><span data-icon="x"></span></button>
+        </div>
+        <div class="progress" id="progress"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <div class="sheet-body" id="sheetBody">
+        <!-- 1 · You -->
+        <div class="step" data-step="1">
+          <div class="field">
+            <label for="fName" data-t="fName">Teacher’s name</label>
+            <input class="input" id="fName" autocomplete="name" data-ph="phName" placeholder="e.g. Shireen Bakri" />
+            <div class="err" data-err="name" data-t="errName">Please write your name.</div>
+          </div>
+          <div class="field">
+            <label for="fEmail" data-t="fEmail">School email</label>
+            <div class="email-wrap">
+              <input class="input" id="fEmail" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="firstname.lastname" />
+              <span class="dom">@cambridge.edu.jo</span>
+            </div>
+            <div class="hint" data-t="emailHint">Confirmations are sent here.</div>
+            <div class="err" data-err="email" data-t="errEmail">Write the part before @cambridge.edu.jo</div>
+          </div>
+          <div class="field">
+            <span class="lbl" data-t="fDept">Department</span>
+            <div class="chips" id="deptChips"></div>
+            <div class="reveal-box" id="deptOtherBox"><div><input class="input" id="fDeptOther" data-ph="phDeptOther" placeholder="Department name" /></div></div>
+            <div class="err" data-err="dept" data-t="errDept">Choose your department.</div>
+          </div>
+          <div class="field">
+            <label for="fHod" data-t="fHod">HOD’s name</label>
+            <input class="input" id="fHod" data-ph="phHod" placeholder="Head of department" />
+            <div class="hint" data-t="hodHint">Your HOD approves the event before the theatre manager.</div>
+            <div class="err" data-err="hod" data-t="errHod">Please write your HOD’s name.</div>
+          </div>
+        </div>
+
+        <!-- 2 · Event -->
+        <div class="step" data-step="2">
+          <div class="field">
+            <label for="fTitle" data-t="fTitle">Event title</label>
+            <input class="input" id="fTitle" data-ph="phTitle" placeholder="e.g. Grade 6 parents orientation" />
+            <div class="err" data-err="title" data-t="errTitle">Give the event a title.</div>
+          </div>
+          <div class="field">
+            <label for="fDesc"><span data-t="fDesc">Event description</span> <span class="opt" data-t="optional">(optional)</span></label>
+            <textarea class="input" id="fDesc" data-ph="phDesc" placeholder="What happens on stage?"></textarea>
+          </div>
+          <div class="field">
+            <span class="lbl" data-t="fAudience">Number of audience</span>
+            <div class="stepper" id="audStepper">
+              <button type="button" data-d="-10" aria-label="-10">−</button>
+              <input id="fAudience" type="number" inputmode="numeric" min="1" max="600" value="50" />
+              <button type="button" data-d="10" aria-label="+10">+</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="lbl" data-t="fAudType">Who’s attending?</span>
+            <div class="chips" id="audChips"></div>
+            <div class="err" data-err="aud" data-t="errAud">Choose at least one.</div>
+          </div>
+          <div class="field">
+            <label for="fAudNote"><span data-t="fAudNote">Audience notes</span> <span class="opt" data-t="optional">(optional)</span></label>
+            <input class="input" id="fAudNote" data-ph="phAudNote" placeholder="e.g. Staff: only HODs" />
+          </div>
+        </div>
+
+        <!-- 3 · When -->
+        <div class="step" data-step="3">
+          <div class="mini-cal" id="pickCal"></div>
+          <div class="err" data-err="date" data-t="errDate">Pick a date.</div>
+          <div id="whenBox" hidden>
+            <div class="picked"><span data-icon="calendar"></span><b id="pickedLbl"></b></div>
+            <span class="lbl" data-t="tlLbl">The stage that day — tap a free spot</span>
+            <div class="tl" id="tl"></div>
+            <div class="time-row" style="margin-top:16px">
+              <div><span class="lbl" data-t="start">Start</span><input class="input" type="time" id="fStart" step="900" /></div>
+              <div><span class="lbl" data-t="end">End</span><input class="input" type="time" id="fEnd" step="900" /></div>
+            </div>
+            <div class="chips dur" id="durChips" style="margin-top:12px"></div>
+            <div class="err" id="timeErr"></div>
+
+            <h4 class="sub-h" data-t="rehTitle">Rehearsal</h4>
+            <div class="switch" id="rehSw" role="switch" tabindex="0">
+              <div class="s-t"><b data-t="rehT">I need a rehearsal</b><small data-t="rehS">Book the stage for a run-through too</small></div>
+              <div class="tog"></div>
+            </div>
+            <div class="reveal-box" id="rehBox"><div>
+              <div class="field" style="margin-top:4px">
+                <span class="lbl" data-t="rehDate">Rehearsal date</span>
+                <input class="input" type="date" id="fRehDate" />
+              </div>
+              <div id="rehWrap" hidden>
+                <div class="tl" id="rehTl"></div>
+                <div class="time-row" style="margin-top:16px">
+                  <div><span class="lbl" data-t="start">Start</span><input class="input" type="time" id="fRehStart" step="900" /></div>
+                  <div><span class="lbl" data-t="end">End</span><input class="input" type="time" id="fRehEnd" step="900" /></div>
+                </div>
+                <div class="chips dur" id="rehDurChips" style="margin-top:12px"></div>
+                <div class="err" id="rehTimeErr"></div>
+              </div>
+              <div class="err" data-err="reh" data-t="errReh">Pick the rehearsal date and time.</div>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- 4 · Facilities -->
+        <div class="step" data-step="4">
+          <p class="hint" style="margin:0 0 14px;font-size:14px" data-t="equipHint">Tap everything you need on the day.</p>
+          <div class="equip" id="equipGrid"></div>
+          <div class="field" style="margin-top:18px">
+            <label for="fOther"><span data-t="fOther">Any other needs</span> <span class="opt" data-t="optional">(optional)</span></label>
+            <textarea class="input" id="fOther" data-ph="phOther" placeholder="Anything not listed above"></textarea>
+          </div>
+        </div>
+
+        <!-- 5 · Review -->
+        <div class="step" data-step="5">
+          <div class="review" id="reviewBox"></div>
+          <div class="rules">
+            <h4 data-t="rulesT">Theatre notes</h4>
+            <ul>
+              <li data-t-html="rule1">Theatre reservations should be made at the <strong>beginning of each school term</strong>.</li>
+              <li data-t-html="rule2">Facilities and materials needed must be handed in <strong>3 days before the event</strong>.</li>
+              <li data-t-html="rule3">Torch use is done in coordination with the theatre manager.</li>
+              <li data-t-html="rule4">Provide the event minutes (walk-through) <strong>a week before</strong>.</li>
+              <li data-t-html="rule5">All screened material (presentations, slideshows, films) is handed in <strong>on a flash drive or by email</strong>.</li>
+            </ul>
+          </div>
+          <div class="agree" id="agree" role="checkbox" tabindex="0" aria-checked="false">
+            <span class="box"><span data-icon="check"></span></span>
+            <span data-t="agree">I’ve read the theatre notes and my HOD approves this event.</span>
+          </div>
+          <div class="err" data-err="agree" data-t="errAgree">Please confirm to continue.</div>
+        </div>
+
+        <!-- success -->
+        <div class="done" id="done">
+          <canvas class="burst" id="burst"></canvas>
+          <div class="ticket" id="ticket"></div>
+          <h3 data-t="doneT">Request sent!</h3>
+          <p data-t="doneP">The theatre manager will review it. You’ll get an email — and a calendar invite once it’s approved.</p>
+          <div class="status-line"><i></i><span data-t="awaiting">Awaiting approval</span></div>
+          <div><button class="btn ghost" data-close><span data-t="doneBtn">Done</span></button></div>
+          <div class="contact-slot" style="margin-top:22px"></div>
+        </div>
+      </div>
+
+      <div class="sheet-foot" id="sheetFoot">
+        <button class="btn ghost" id="backBtn"><span class="flip"><span data-icon="chevL"></span></span><span data-t="back">Back</span></button>
+        <button class="btn primary grow" id="nextBtn"><span id="nextLbl" data-t="next">Continue</span><span class="flip" id="nextIco"><span data-icon="arrowR"></span></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="config.js?v=4"></script>
+  <script src="api.js?v=4"></script>
+  <script src="i18n.js?v=4"></script>
+  <script src="icons.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+</body>
+</html>

@@ -60,7 +60,7 @@
           <p class="hint">${esc(r.name)} has been emailed.</p></div>` : ""}
         <div class="review" style="margin-top:16px">${details(r)}</div>
         ${!done && (r.status === "pending" || r.status === "approved") ? `
-          <div class="field" style="margin-top:16px"><label for="reason">Note to the teacher <span class="opt">(optional)</span></label><textarea class="input" id="reason" placeholder="${r.status === "pending" ? "e.g. Please hand in the CD by Tuesday" : "Reason for cancelling"}"></textarea></div>
+          <div class="field" style="margin-top:16px"><label for="reason">Note to the teacher <span class="opt">(optional)</span></label><textarea class="input" id="reason" placeholder="${r.status === "pending" ? "e.g. Please email me the slides by Tuesday" : "Reason for cancelling"}"></textarea></div>
           <div class="acts">
             ${r.status === "pending" ? `<button class="btn ok grow" data-d="approve" style="flex:1">${icon("check")}<span>Approve</span></button><button class="btn primary" data-d="reject" style="flex:1">${icon("x")}<span>Decline</span></button>` : `<button class="btn primary" data-d="cancel" style="flex:1">${icon("x")}<span>Cancel booking</span></button>`}
           </div>` : ""}
